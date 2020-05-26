@@ -1,38 +1,21 @@
+var timeline = {
+    times: [],
+    keys: []
+};
 
+var myInput = document.getElementById("myText");
 
-window.onload=function() {
-    initTimeline();
-    var myInput = document.getElementById("myText");
-    var myOutput = document.getElementById("myConsole");
+var myOutput = document.getElementById("myConsole");
 
-    function logMessage(message) {
-        let p = document.createElement('p');
-        p.appendChild(document.createTextNode(message));
-        myOutput.appendChild(p);
-    }
+myInput.addEventListener('input', (e) => {
+    timeline.times.push(Date.now());
+    timeline.keys.push(e.data);
+});
 
-    function addTime(key) {
-        var myTimeline = JSON.parse(localStorage.getItem("timeline"));
-        myTimeline += (key, Date.now());
-        logMessage("Stored " + key + " with stamp ~" + Date.now());
-        localStorage.setItem("timeline", JSON.stringify(myTimeline));
-    }
-
-    myInput.addEventListener('input', (e) => {
-        // logMessage(`input event. you have just inputed "${e.data}"`);
-        addTime(e.data);
-    });
-}
-
-function validateInput() {
-    var myInput = document.getElementById("myText").value;
-    var myOutput = document.getElementById("myOutput");
-
-    localStorage.setItem("data", myInput)
-    if (myInput.length == 0)
-        alert("Error Empty Input :c");
-    myOutput.innerHTML = localStorage.getItem("data");
-    return true;
+function logMessage(message) {
+    let p = document.createElement('p');
+    p.appendChild(document.createTextNode(message));
+    myOutput.appendChild(p);
 }
 
 function duration(timestamps) {
@@ -46,18 +29,20 @@ function duration(timestamps) {
     return durations.reverse();
 }
 
-
-function initTimeline() {
-    var timeline = {timestamps:{}};
-    localStorage.setItem("timeline", JSON.stringify(timeline));
+function save() {
+    localStorage.setItem(timeline, JSON.stringify(timeline));
 }
+function reprint() {
+    var durations = duration(timeline.times);
+    var i = 0;
+    console.log(timeline.keys[i++]);
+    for (; i < timeline.keys.length; i++) {
+        console.log(timeline.keys[i]);
+        // var x = timeline.keys[i];
+        setTimeout(console.log, 1000, i);
+        // setTimeout(call(), 3000);
+        // logMessage(durations[i]);
+        // setTimeout(durations[i], myInput.value += timeline.keys[i]);
 
-function getData() {
-    var times = JSON.parse(localStorage.getItem("timeline"));
-    for (var t in times) {
-        if (times.hasOwnProperty(t)) {
-            var val = times[t];
-            // console.log(val);
-        }
     }
 }
