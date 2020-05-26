@@ -4,18 +4,24 @@
 <link rel="stylesheet" href="myStyle.css">
 <script src="dopeScript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<head><script type="text/javascript">window.onload = initTimeline()</script></head>
+
 <body>
 <section>
     <h1>My Box</h1>
-    <form action="/action_page.php">
-        [Input] <= <input type="text" id="myText" size="50"  name="myText"> <br>
-        <button type="button" onclick="validateInput()">TREAT</button> <br>
-        [Output] => <div id="myOutput">
-        </div> <br>
+<!--    <form action="/action_page.php">-->
+    <form>
+        [INPUT] <br><textarea rows="5" id="myText"></textarea> <button onclick="getData()">Sho me what u got</button>
+<!--        [Input] <= <input type="text" id="myText" size="50"  name="myText"> <br>-->
+<!--        <button type="button" onclick="validateInput()">TREAT</button> <br>-->
+<!--        <div>[Output] =>-->
+<!--            <textarea rows="5" id="textarea"></textarea>-->
+<!--        </div> <br>-->
 
-        <button type="button" onclick="getData()">test</button> <br>
+<!--        <button type="button" onclick="getData()">test</button> <br>-->
     </form>
+    <div class="flex">[OUTPUT]
+        <div id="myConsole"></div>
+    </div>
 </section>
 </body>
 </html>
