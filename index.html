@@ -4,12 +4,22 @@
 <link rel="stylesheet" href="myStyle.css">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
 <body>
-
 <section>
     <h1>My Box</h1>
-        [INPUT] <br><textarea rows="5" id="myText"></textarea> <button onclick="save(), reprint()">Sho me</button>
+        [INPUT] <br><textarea rows="5" id="myText"></textarea><br>
+
+    <i class="fas fa-dot-circle w3-large" onclick="start_record()"></i>
+
+    <i class="fas fa-square" onclick="stop_record()"></i>
+
+    <i class="fas fa-redo-alt" onclick="reprint()"></i>
+<!--    <button onclick="start_record()">RECORD</button><br>-->
+<!--    <button onclick="stop_record()">STOP</button><br>-->
+<!--    <button onclick="reprint()">REPLAY</button>-->
 </section>
 <script src="dopeScript.js"></script>
 </body>

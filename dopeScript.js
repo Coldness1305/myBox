@@ -8,11 +8,6 @@ var myInput = document.getElementById("myText");
 
 var myOutput = document.getElementById("myConsole");
 
-myInput.addEventListener('input', (e) => {
-    timeline.times.push(Date.now());
-    timeline.keys.push(e.data);
-});
-
 function logMessage(message) {
     let p = document.createElement('p');
     p.appendChild(document.createTextNode(message));
@@ -25,7 +20,18 @@ function duration() {
     }
 }
 
-function save() {
+function start_record() {
+    myInput.addEventListener('input', (e) => {
+        timeline.times.push(Date.now());
+        timeline.keys.push(e.data);
+    });
+}
+
+function stop_record() {
+    myInput.removeEventListener('input', (e) => {
+        timeline.times.push(Date.now());
+        timeline.keys.push(e.data);
+    });
     localStorage.setItem(timeline, JSON.stringify(timeline));
 }
 
@@ -43,12 +49,13 @@ function myLoop(i) {
 }
 
 function reprint() {
-    myInput.value = "";
-    if (timeline.keys.length == 0)
+    if (timeline.keys.length == 0) {
+        alert("Please Record and Save before replaying.");
         return;
+    }
+    myInput.value = "";
     duration();
     console.log(timeline);
     write(timeline.keys[0]);
     myLoop(1);
-    
 }
