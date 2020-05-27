@@ -10,16 +10,12 @@
 <body>
 <section>
     <h1>My Box</h1>
-        [INPUT] <br><textarea rows="5" id="myText"></textarea><br>
+    <p id="in">INPUT</p>
+    <textarea rows="10" cols="40" id="myText"></textarea><br>
 
-    <i class="fas fa-dot-circle w3-large" onclick="start_record()"></i>
-
-    <i class="fas fa-square" onclick="stop_record()"></i>
-
-    <i class="fas fa-redo-alt" onclick="reprint()"></i>
-<!--    <button onclick="start_record()">RECORD</button><br>-->
-<!--    <button onclick="stop_record()">STOP</button><br>-->
-<!--    <button onclick="reprint()">REPLAY</button>-->
+    <button onclick="start_record()"><i class="fas fa-dot-circle"></i></button>
+    <button onclick="stop_record()"><i class="fas fa-square"></i></button>
+    <button onclick="reprint()"><i class="fas fa-redo-alt"></i></button>
 </section>
 <script src="dopeScript.js"></script>
 </body>
