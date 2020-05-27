@@ -1,6 +1,7 @@
 var timeline = {
     times: [],
-    keys: []
+    keys: [],
+    durations: []
 };
 
 var myInput = document.getElementById("myText");
@@ -18,31 +19,36 @@ function logMessage(message) {
     myOutput.appendChild(p);
 }
 
-function duration(timestamps) {
-    var last = timestamps.pop();
-    var durations = [];
-
-    while (timestamps.length) {
-        var newTime = timestamps.pop();
-        durations.push(last - (newTime));
+function duration() {
+    for (var i = 1; i < timeline.times.length; i++) {
+        timeline.durations[i - 1] = timeline.times[i] -timeline.times[i - 1];
     }
-    return durations.reverse();
 }
 
 function save() {
     localStorage.setItem(timeline, JSON.stringify(timeline));
 }
-function reprint() {
-    var durations = duration(timeline.times);
-    var i = 0;
-    console.log(timeline.keys[i++]);
-    for (; i < timeline.keys.length; i++) {
-        console.log(timeline.keys[i]);
-        // var x = timeline.keys[i];
-        setTimeout(console.log, 1000, i);
-        // setTimeout(call(), 3000);
-        // logMessage(durations[i]);
-        // setTimeout(durations[i], myInput.value += timeline.keys[i]);
 
-    }
+function write(key) {
+    myInput.value += key;
+}
+
+function myLoop(i) {
+    setTimeout(function () {
+        myInput.value += timeline.keys[i];
+        i++;
+        if (i < timeline.keys.length)
+            myLoop(i);
+    }, timeline.durations[i - 1]);
+}
+
+function reprint() {
+    myInput.value = "";
+    if (timeline.keys.length == 0)
+        return;
+    duration();
+    console.log(timeline);
+    write(timeline.keys[0]);
+    myLoop(1);
+    
 }
