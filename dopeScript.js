@@ -8,12 +8,6 @@ var myInput = document.getElementById("myText");
 
 var myOutput = document.getElementById("myConsole");
 
-function logMessage(message) {
-    let p = document.createElement('p');
-    p.appendChild(document.createTextNode(message));
-    myOutput.appendChild(p);
-}
-
 function duration() {
     for (var i = 1; i < timeline.times.length; i++) {
         timeline.durations[i - 1] = timeline.times[i] -timeline.times[i - 1];
@@ -32,30 +26,30 @@ function stop_record() {
         timeline.times.push(Date.now());
         timeline.keys.push(e.data);
     });
-    localStorage.setItem(timeline, JSON.stringify(timeline));
+    duration();
+    localStorage.setItem('timeline', JSON.stringify(timeline));
 }
 
 function write(key) {
     myInput.value += key;
 }
 
-function myLoop(i) {
+function myLoop(i, data) {
     setTimeout(function () {
-        myInput.value += timeline.keys[i];
+        myInput.value += data.keys[i];
         i++;
-        if (i < timeline.keys.length)
-            myLoop(i);
-    }, timeline.durations[i - 1]);
+        if (i < data.keys.length)
+            myLoop(i, data);
+    }, data.durations[i - 1]);
 }
 
 function reprint() {
-    if (timeline.keys.length == 0) {
+    var data = JSON.parse(localStorage.getItem('timeline'));
+    if (data.keys.length == 0) {
         alert("Please Record and Save before replaying.");
         return;
     }
     myInput.value = "";
-    duration();
-    console.log(timeline);
-    write(timeline.keys[0]);
-    myLoop(1);
+    write(data.keys[0]);
+    myLoop(1, data);
 }
