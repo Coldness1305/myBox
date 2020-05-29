@@ -6,8 +6,6 @@ var timeline = {
 
 var myInput = document.getElementById("myText");
 
-var myOutput = document.getElementById("myConsole");
-
 function duration() {
     for (var i = 1; i < timeline.times.length; i++) {
         timeline.durations[i - 1] = timeline.times[i] -timeline.times[i - 1];
